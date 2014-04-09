@@ -7,7 +7,7 @@ Angular JS Create-Update-Delete app that allows you to add blocks of data and pe
 ### Components
 * angular.js: Your preferred Angular JS version
 * blocks.js: Angular JS CRUD implementation
-* localStorageModule: Customed but obtained [here](http://gregpike.net/demos/angular-local-storage/localStorageModule.js)
+* localStorageModule: Customized module available [here](https://github.com/grevory/angular-local-storage/blob/master/angular-local-storage.js)
 * bootstrapp.css: Twitter Bootstrapp for standard styles
 * blocks.css: CSS customization
 
