@@ -57,16 +57,18 @@ function blockCtrl($scope, localStorageService){
 
       /** In Memory Data***/
       $scope.blocks[$scope.editIndex].title = $scope.blockTitleInput;  	  
-      //$scope.blocks[$scope.editIndex].content = $scope.blockContentInput;
+      $scope.blocks[$scope.editIndex].content = $scope.blockContentInput;
       /** grabs the value from the ACE editor and saves it to the
-      corresponding object in the array! **/
-      $scope.blocks[$scope.editIndex].content = editor.getValue();
+      corresponding object in the array! 
+      $scope.blocks[$scope.editIndex].content = editor.getValue();**/
       
       /** Local Storage Persistance
       Overrides the current value at editIndex**/
       block = new Object();
       block.title=$scope.blockTitleInput;
-      block.content=editor.getValue();
+      block.content=$scope.blockContentInput;
+      /** Disabling editor
+      block.content=editor.getValue(); **/
       block.collapsed=false;
       localStorageService.add('yourModule.'+$scope.editIndex,
         JSON.stringify(block));
@@ -105,13 +107,14 @@ function blockCtrl($scope, localStorageService){
 		$scope.editIndex = index;
 		$scope.blockTitleInput = $scope.blocks[index].title;
 		
-    /**Commented out so that the user edits in the editor**/
-    //$scope.blockContentInput = $scope.blocks[index].content;
+    
+    $scope.blockContentInput = $scope.blocks[index].content;
+    /**Commented out due to editor disable
     $scope.blockContentInput = '<Edit the content in the editor>';
     
-    //$scope.aceEditor = $scope.blocks[index].title;
+    $scope.aceEditor = $scope.blocks[index].title;
     var content = $scope.blocks[index].content;
-    editor.setValue(content); 
+    editor.setValue(content); **/
 	};
 	
 	$scope.deleteBlock = function(index){
