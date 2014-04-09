@@ -1,0 +1,17 @@
+/* Styles go here */
+
+.selected-true{
+  color:blue;
+}
+.remainingItems{
+  font-size:14px;
+	color: #5695FE;
+}
+.collapsed-true{
+	visibility:hidden;
+}
+
+.header.title { float:left }
+.header.buttons { margin-right: 20px }
+
+

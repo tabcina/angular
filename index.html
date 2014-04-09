@@ -1,0 +1,125 @@
+<html ng-app="yourModule">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+  <!-- bootstrapp twitter -->
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap.css" rel="stylesheet">
+  <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/img/glyphicons-halflings.png"></script>-->
+  <link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">
+
+  <script src="blocks.js"></script>
+  <script src="localStorageModule.js"></script>
+  <link rel="stylesheet" href="blocks.css">
+  
+  <!-- ACE css -->
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+
+
+<div class="container" ng-controller="blockCtrl">
+  <h1>Javascript Sandbox</h1>
+	<table class="table table-striped table-bordered" ng-repeat="block in blocks">
+        <thead>
+          <tr>
+            <th>
+              <div class="header">
+                <span class="title"> {{block.title}}</span>
+                <span class="buttons" style="float: right">
+                  <a style="text-decoration:none" href="#" ng-click="invertState($index)">
+                    {{ block.collapsed==0 && "[-]" || "[+]" }}    
+                  </a>
+                  <a href="#" ng-click="editBlock($index)">
+                    <i class="icon-pencil" style="margin-top: 4px"></i>
+                  </a>
+                  <a href="#" ng-click="deleteBlock($index)">
+                    <i class="icon-trash" style="margin-top: 4px"></i>
+                  </a>
+                </span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody ng-hide="block.collapsed==1">
+          <tr>
+            <td>{{block.content}}</td>
+          </tr>
+          <!-- Si lo dibujas aquí adentro super truena -->
+          
+        </tbody>
+    </table>
+        
+      <form ng-submit="saveBlock()" name="saveForm" novalidate>
+  			<div>
+        
+              <input type="text" ng-model="blockTitleInput" size="30" placeholder="Title of Block" required>
+  			</div>
+  			
+  			<div>
+          <textarea type="text"  ng-model="blockContentInput" rows="4"  cols="100" placeholder="Content of Block" required></textarea>
+          <!-- Adding the style="display:none" to temporaly hide this-->
+    			<textarea type="text" style="display:none" ng-model="blockContentInput" rows="4"  cols="100" placeholder="Content of Block" required></textarea>
+        </div>
+  			<span class="help-block">Save new title/content here!</span>
+        
+  			<div>
+  				<button class="btn" type="submit" value="add"> {{ editIndex==-1 && "Create" || "Update" }}</button>
+  			</div>
+      </form>
+      <div><a href="#" ng-click="getLocalSS()">Get Local Storage</a></div>
+      <div><a href="#" ng-click="clearLocalSS()">Clear Local Storage</a></div>
+
+            <div style="position:relative; height: 200px;">
+              <div id="editor" ng-model="aceEditor">function reverse(my_str)  
+{    
+    var comStr="";  
+    var result="";  
+    var i=my_str.length;  
+     i=i-1;  
+     for (var x = i; x >=0; x--)  
+      {  
+        result= my_str.charAt(x);  
+        comStr+=result;  
+       }  
+   return comStr;;
+}
+function fnFooBar(strVal) {
+
+  return "New text " + strVal;
+}
+x = reverse("Some Text");
+y = x.toUpperCase();
+z = fnFooBar(y);
+        </div>
+      </div>
+
+<br /> 
+ 
+ 
+
+<script src="src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+    var editor = ace.edit("editor");
+     editor.getSession().setTabSize(2);
+    editor.getSession().setUseWrapMode(true);
+    editor.setTheme("ace/theme/clouds");
+    editor.getSession().setMode("ace/mode/javascript");
+
+</script>
+    		
+        <input type="text" size="100" ng-model="evaluatedResult" size="30" placeholder=">" required>
+    		<div align="right" >
+  				<button class="btn btn-small btn-primary" type="button" ng-click="runCode()">Run</button>
+  			</div>
+        <br></br>
+        <br></br>
+        
+
+  
+</div>
+</body>
+</html>
